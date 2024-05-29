@@ -1,0 +1,19 @@
+bootJar.enabled = false
+jar.enabled = true
+
+allprojects {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    }
+}
+
+subprojects {
+    dependencies {
+        runtimeOnly 'org.postgresql:postgresql'
+    }
+}
+
+dependencies {
+    //ulid
+    implementation 'com.github.f4b6a3:ulid-creator:5.2.3'
+}

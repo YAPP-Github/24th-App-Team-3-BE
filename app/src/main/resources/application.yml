@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: yapp
+  profiles:
+    active: local
+    group:
+      local: domain-local
+

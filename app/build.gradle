@@ -1,0 +1,21 @@
+plugins {
+    id 'org.springframework.boot' version '3.2.5'
+}
+
+jar {
+    enabled = false
+}
+
+allprojects {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        implementation project(":common")
+    }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation project(":app:api:user-api")
+}
