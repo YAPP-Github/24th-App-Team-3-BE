@@ -4,7 +4,7 @@
 git pull origin develop
 
 # 애플리케이션 빌드
-./gradlew build
+./gradlew app:build
 
 # Docker Compose를 사용하여 컨테이너 실행
 docker-compose down
