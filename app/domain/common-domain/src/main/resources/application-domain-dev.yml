@@ -1,0 +1,7 @@
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: create
+        show-sql: true
+        open-in-view: false
+        generate-ddl: true

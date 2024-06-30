@@ -5,15 +5,41 @@ services:
     container_name: yapp_postgresql
     image: postgres:14
     environment:
-      - 'POSTGRES_DATABASE=yapp'
-      - 'POSTGRES_USER=local'
-      - 'POSTGRES_PASSWORD=local'
+      POSTGRES_DB: yapp
+      POSTGRES_USER: yapp
+      POSTGRES_PASSWORD: yapp
     ports:
-      - '5432'
+      - '5432:5432'
     restart: always
+    networks:
+      - app-network
 
   redis:
     container_name: yapp_redis
     image: redis:alpine
     ports:
       - '6379:6379'
+    networks:
+      - app-network
+
+  app:
+    image: yapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/yapp
+      SPRING_DATASOURCE_USERNAME: yapp
+      SPRING_DATASOURCE_PASSWORD: yapp
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgresql
+      - redis
+    networks:
+      - app-network
+
+networks:
+  app-network:
