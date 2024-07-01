@@ -1,0 +1,54 @@
+<html lang="ko" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content" class="container">
+  <div class="my-3">
+    <h2 class="text-center">아티스트 수정</h2>
+    <form th:action="@{/api/v1/admin/artists/{id}(id=${artist.id})}" method="post">
+      <input type="hidden" name="_method" value="put" />
+      <div class="form-group mb-3">
+        <label for="koreanName" style="font-weight: bold;">한국 이름</label>
+        <input type="text" name="koreanName" id="koreanName" class="form-control" th:value="${artist.koreanName}">
+      </div>
+      <div class="form-group mb-3">
+        <label for="englishName" style="font-weight: bold;">영어 이름</label>
+        <input type="text" name="englishName" id="englishName" class="form-control" th:value="${artist.englishName}">
+      </div>
+      <div class="form-group mb-3">
+        <label for="country" style="font-weight: bold;">국적</label>
+        <input type="text" name="country" id="country" class="form-control" th:value="${artist.country}">
+      </div>
+      <div class="form-group mb-3">
+        <label for="artistGender"><span style="font-weight: bold;">성별</span></label>
+        <select name="artistGender" id="artistGender" class="form-control">
+          <option value="MAN" th:selected="${artist.artistGender} == 'MAN'">남성</option>
+          <option value="WOMAN" th:selected="${artist.artistGender} == 'WOMAN'">여성</option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label for="artistType"><span style="font-weight: bold;">타입</span></label>
+        <select name="artistType" id="artistType" class="form-control">
+          <option value="SOLO" th:selected="${artist.artistType} == 'SOLO'">솔로</option>
+          <option value="GROUP" th:selected="${artist.artistType} == 'GROUP'">그룹</option>
+        </select>
+      </div>
+      <div class="form-group mb-3">
+        <label><span style="font-weight: bold;">장르 선택</span></label>
+        <div id="genreCheckboxes">
+          <div th:each="genre : ${genres}">
+            <div class="form-check">
+              <label>
+                <input class="form-check-input" type="checkbox" th:id="'genre_' + ${genre.id}"
+                       name="genreIds" th:value="${genre.id}"
+                       th:checked="${artist.genreNames.contains(genre.name)}">
+              </label>
+              <label class="form-check-label" th:for="'genre_' + ${genre.id}" th:text="${genre.name}"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-end mt-3">
+        <button type="submit" class="btn btn-primary">수정 완료</button>
+      </div>
+    </form>
+  </div>
+</div>
+</html>

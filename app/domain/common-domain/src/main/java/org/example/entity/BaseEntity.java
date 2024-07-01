@@ -33,6 +33,10 @@ public abstract class BaseEntity implements Persistable<UUID> {
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted = false;
 
+    public void updateDeleteStatus(Boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public boolean isNew() {
         return id != null;

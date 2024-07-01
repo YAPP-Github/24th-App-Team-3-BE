@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.repository.user;
 
 import static org.example.entity.QUser.user;
 

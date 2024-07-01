@@ -1,0 +1,59 @@
+<html lang="ko" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content" class="container my-3">
+  <div class="container my-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form th:action="@{/api/v1/admin/artists}" method="post">
+          <div class="mb-3">
+            <h2 class="text-center">추가할 아티스트</h2>
+            <label for="koreanName"><span style="font-weight: bold;">아티스트 한국 이름</span></label>
+            <input type="text" name="koreanName" id="koreanName" class="form-control" placeholder="아티스트의 한국 이름을 입력하세요.">
+          </div>
+          <div class="mb-3">
+            <label for="englishName"><span style="font-weight: bold;">아티스트 영어 이름</span></label>
+            <input type="text" name="englishName" id="englishName" class="form-control" placeholder="아티스트의 영어 이름을 입력하세요.">
+          </div>
+          <div class="mb-3">
+            <label for="country"><span style="font-weight: bold;">국적</span></label>
+            <input type="text" name="country" id="country" class="form-control" placeholder="아티스트의 국적을 입력하세요.">
+          </div>
+          <div class="mb-3">
+            <label for="artistGender"><span style="font-weight: bold;">성별</span></label>
+            <select name="artistGender" id="artistGender" class="form-control">
+              <option value="">성별 선택</option>
+              <option value="MAN">남성</option>
+              <option value="WOMAN">여성</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="artistType"><span style="font-weight: bold;">타입</span></label>
+            <select name="artistType" id="artistType" class="form-control">
+              <option value="">타입 선택</option>
+              <option value="SOLO">솔로</option>
+              <option value="GROUP">그룹</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label><span style="font-weight: bold;">장르 선택</span></label>
+            <div id="genreCheckboxes">
+              <div th:each="genre : ${genres}">
+                <div class="form-check">
+                  <label>
+                    <input class="form-check-input" type="checkbox" th:id="'genre_' + ${genre.id}"
+                           name="genreIds" th:value="${genre.id}">
+                  </label>
+                  <label class="form-check-label" th:for="'genre_' + ${genre.id}"
+                         th:text="${genre.name}"></label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">확인</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

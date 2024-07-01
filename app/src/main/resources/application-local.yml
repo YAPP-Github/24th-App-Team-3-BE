@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
   docker:
     compose:
       enabled: true

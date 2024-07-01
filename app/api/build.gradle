@@ -10,6 +10,10 @@ allprojects {
 
         implementation 'org.springframework.data:spring-data-commons:3.3.0'
 
+        // thymeleaf
+        implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
+
         implementation "org.springframework.boot:spring-boot-starter-web"
         implementation 'org.springframework.boot:spring-boot-starter-validation'
         testImplementation "org.springframework.boot:spring-boot-starter-test"

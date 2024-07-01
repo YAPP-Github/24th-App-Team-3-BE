@@ -38,30 +38,35 @@ public class SecurityConfig {
             .authorizeHttpRequests(registry ->
                 registry
                     .requestMatchers(
-                        "swagger-ui/**", "/v3/api-docs/**",
-                        "api/v1/users/login"
+                        "/swagger-ui/**", "/v3/api-docs/**",
+                        "/api/v1/users/login", "/api/v1/admin/**",
+                        "/css/**", "/js/**"
                     ).permitAll()
                     .requestMatchers(
                         HttpMethod.GET,
-                        "api/v1/artists",
-                        "api/v1/genres",
-                        "api/v1/shows"
+                        "/api/v1/artists",
+                        "/api/v1/genres",
+                        "/api/v1/shows"
                     ).permitAll()
                     .requestMatchers(
                         HttpMethod.GET,
-                        "api/v1/shows/interests"
+                        "/api/v1/shows/interests"
                     ).hasAnyRole("USER", "ADMIN")
                     .requestMatchers(
                         HttpMethod.POST,
-                        "api/v1/users/logout",
-                        "api/v1/shows/**/interest",
-                        "api/v1/shows/**/alert"
+                        "/api/v1/users/logout",
+                        "/api/v1/shows/**/interest",
+                        "/api/v1/shows/**/alert"
                     ).hasAnyRole("USER", "ADMIN")
                     .requestMatchers(
                         HttpMethod.POST,
-                        "api/v1/artists",
-                        "api/v1/genres",
-                        "api/v1/shows"
+                        "/api/v1/artists",
+                        "/api/v1/genres",
+                        "/api/v1/shows"
+                    ).hasRole("ADMIN")
+                    .requestMatchers(
+                        HttpMethod.DELETE,
+                        "/api/v1/admin/genres/**"
                     ).hasRole("ADMIN")
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

@@ -1,0 +1,17 @@
+<html lang="ko" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content" class="container">
+  <div class="my-3">
+    <h2 class="text-center">장르 수정</h2>
+    <form th:action="@{/api/v1/admin/genres/{id}(id=${genre.id})}" method="post">
+      <input type="hidden" name="_method" value="put" />
+      <div class="form-group mt-3">
+        <label for="name" style="font-weight: bold;">장르명</label>
+        <input type="text" name="name" id="name" class="form-control" th:value="${genre.name}">
+      </div>
+      <div class="text-end mt-3">
+        <button type="submit" class="btn btn-primary">수정 완료</button>
+      </div>
+    </form>
+  </div>
+</div>
+</html>

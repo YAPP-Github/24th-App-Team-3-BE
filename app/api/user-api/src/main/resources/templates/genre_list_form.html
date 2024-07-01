@@ -1,0 +1,48 @@
+<html lang="ko" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="content" class="container my-3">
+  <div class="container my-3">
+    <h2 class="text-center">장르 목록</h2>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">장르명</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="genre : ${genres}">
+        <td th:text="${genre.id}" hidden="hidden"></td>
+        <td th:text="${genre.name}"></td>
+        <td class="text-end">
+          <form th:action="@{/api/v1/admin/genres/{id}(id=${genre.id})}" method="get" style="display: inline-block;">
+            <button type="submit" class="btn btn-primary">수정</button>
+          </form>
+          <form th:action="@{/api/v1/admin/genres/{id}(id=${genre.id})}" method="post" style="display: inline-block;">
+            <input type="hidden" name="_method" th:value="delete" />
+            <button type="button" class="btn btn-danger" th:genreId="${genre.id}" onclick="deleteGenre(this.getAttribute('genreId'))">삭제</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script layout:fragment="script" type='text/javascript'>
+  function deleteGenre(id) {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      const form = document.createElement("form");
+      form.method = "post";
+      form.action = `/api/v1/admin/genres/${id}`;
+      const methodInput = document.createElement("input");
+      methodInput.setAttribute("type", "hidden");
+      methodInput.setAttribute("name", "_method");
+      methodInput.setAttribute("value", "delete");
+      form.appendChild(methodInput);
+      document.body.appendChild(form);
+      form.submit();
+    } else {
+      alert("삭제 취소");
+    }
+  }
+</script>
+</html>
